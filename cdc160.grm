@@ -1,0 +1,16 @@
+open DataTypes
+%%
+%term EOF | W of word | INS
+%nonterm instr of Instr list | program of Instructions
+%pos int
+%arg (fileName) : string
+%start program
+%eop EOF
+%noshift EOF
+%name CDC160
+%%
+program : instr (Instructions(instr))
+instr : INS W W W instr (([InstrLong((W1, W2, W3))] @ instr))
+      | INS W W instr (([Instr((W1, W2))] @ instr))
+      | INS W W W (([InstrLong((W1, W2, W3))]))
+      | INS W W (([Instr((W1, W2))]))
