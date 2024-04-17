@@ -146,7 +146,7 @@ fun emulate (fileName : string) =
 		  | 0wx21 => (case E
 			       of
 				  (*STM*)
-				  0wx00 => (Array.update(ib,(Word.toInt (Array.sub(ib, (Word.toInt (Array.sub(rb,Word.toInt (P+0wx1))))))) ,A); execute(rb,db,ib,P+0wx2,A))
+				  0wx00 => (Array.update(ib,(Word.toInt (Array.sub(rb,Word.toInt (P+0wx1)))) ,A); execute(rb,db,ib,P+0wx2,A))
 				(*STI*)
 				| _ => ( Array.update(ib,Word.toInt (Array.sub(db, Word.toInt E)),A); execute(rb,db,ib,P+0wx1,A))
 			     )
@@ -154,7 +154,7 @@ fun emulate (fileName : string) =
 		  | 0wx22 => (case E
 			       of
 				  (*STC*)
-				  0wx00 => (Array.update(ib, Word.toInt P, Array.sub(rb, Word.toInt(P+0wx1))) ; execute(rb,db,ib,P+0wx2,A))
+				  0wx00 => (Array.update(rb, Word.toInt (Array.sub(rb, Word.toInt(P+0wx1))), A) ; execute(rb,db,ib,P+0wx2,A))
 				(*STF*)
 				| _ => (Array.update(rb, Word.toInt(P+E), A) ; execute(rb,db,ib,P+0wx1,A)) 
 			     )
