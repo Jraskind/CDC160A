@@ -45,7 +45,7 @@ fun emulate (fileName : string) =
 	val ib : word array= Array.fromList (List.tabulate(4096, (fn x => 0wx0)))
 	val P : word = 0wx0
 	val A : word = 0wx0
-	fun decode line = (Word.andb(line,0wxfc0),Word.andb(line,0wx03f));
+	fun decode line = (Word.>>(Word.andb(line,0wxfc0), 0wx6),Word.andb(line,0wx03f));
 	fun getComplement w = Word.andb(Word.notb(w), 0wxfff);
 	fun leftshift w n =
 	    let val shifted = Word.<<(w, Word.fromInt n)
@@ -53,11 +53,12 @@ fun emulate (fileName : string) =
 		if shifted > 0wxfff then Word.andb(Word.orb(shifted, Word.>>(shifted, 0wxC)), 0wxfff) else shifted		
 	    end
 	fun isPositive w = (w >= 0wx800 andalso w < 0wxfff)
-	fun CDCPrint w = (if w>0wxfff then ~(Word.toInt (getComplement(w)))  else Word.toInt(w))
+	fun CDCPrint w = (if w>=0wxfff then print( (Int.toString (~(Word.toInt (getComplement(w)))))^"\n")  else (print ((Int.toString (Word.toInt(w)))^"\n")))
 	fun execute (rb, db, ib, P, A) =
 	    let
 		val (F, E) = decode (Array.sub (rb, Word.toInt P)) (*Decode the word at P*)
 	    in
+		(* print("DEBUG: "^Word.toString(F)^" "^Word.toString(E)^"\n"); *)
 		case F 
 		 of
 		    0wx00 =>
