@@ -3,7 +3,7 @@ Toy Emulator of the CDC160A
 ## Architecture
 ![CDC160A Architecture](./images/architecture.png "CDC160A Architecture")
 
-The real CDC160A had a variety of extra registers that handle I/O, buffered data control, and overflow. Since I wrote this in SML with the power of a computer thousands of times faster than a CDC I chose to ignore those constraints (hence the "Toy" in "Toy Emulator"). We are only concerned with two registers: A and P. A is the arithmetic register (or accumulator) which is where all arithmetic computations take place. P is the program control register which stores the value of the current address in the relative data bank.
+The real CDC160A had a variety of extra registers that handle I/O, buffered data control, and overflow. Since I wrote this in SML with the power of a computer thousands of times faster than a CDC I chose to ignore those constraints (hence the "Toy" in "Toy Emulator"). We are only concerned with two registers: A and P. A is the arithmetic register (or accumulator) and it is where all arithmetic computations take place. P is the program control register which stores the value of the current address in the relative data bank.
 
 The CDC160A had at least two memory banks and could be upgraded to include up to eight in a single machine. Each bank could hold a maximum of 4096 12-bit words[^1]. Banks could then be assigned the role of relative (r), direct (d), indirect (i), or buffer (b) storage:
 
@@ -103,7 +103,7 @@ All codes are in the original octal format. A word is 12-bits. Codes take up one
 | JFI | 71 | XX | ____ | Jump Forward Indirect[^9] |
 | PRT | 01 | 04 | ____ | Print Contents of A |
 
-[^1]: Why 12-bits? Before the IBM System/360 characters where commonly encoded with 6 bits. The English language has 24 lowercase and 24 uppercase characters totaling 48 unique letters. log~2~(48) = ~5.59 which means that at least 6 bits are needed to encode those letters; why use anymore than one needs? It turned out that the 8-bit encoding of the IBM System/360 was more memory efficient since decimal digits could be "packed" into one byte (only four bits are needed to encode the decimal digits (0-9)), so a 32-bit word could store 8 decimal digits instead of 5.
+[^1]: Why 12-bits? Before the IBM System/360 characters were commonly encoded with 6 bits. The English language has 24 lowercase and 24 uppercase characters totaling 48 unique letters. log~2~(48) = ~5.59 which means that at least 6 bits are needed to encode those letters; why use anymore than one needs? It turned out that the 8-bit encoding of the IBM System/360 was more memory efficient since decimal digits could be "packed" into one byte (only four bits are needed to encode the decimal digits (0-9)), so a 32-bit word could store 8 decimal digits instead of 5.
 [^2]: For -314 (oct) to 314 (oct) the result will be correct. For A > +314 or A < -314 then result will be correct modulo 2^12^-1 (204 decimal).
 [^3]: For -24 (oct) to 24 (oct) the result will be correct. For A > +24 or A < -24 then result will be correct modulo 2^12^-1 (204 decimal).
 [^4]: Left shifts are circular. (400 << 1 => 001)
