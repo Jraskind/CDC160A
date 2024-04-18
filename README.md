@@ -103,7 +103,7 @@ All codes are in the original octal format. A word is 12-bits. Codes take up one
 | JFI | 71 | XX | ____ | Jump Forward Indirect[^9] |
 | PRT | 01 | 04 | ____ | Print Contents of A |
 
-[^1]: Why 12-bits? Before the IBM System/360 characters were commonly encoded with 6 bits. The English language has 26 lowercase and 26 uppercase characters totaling 52 unique letters. log~2~(52) = ~5.70 which means that at least 6 bits are needed to encode those letters; why use anymore than one needs? It turned out that the 8-bit encoding of the IBM System/360 was more memory efficient since decimal digits could be "packed" into one byte (only four bits are needed to encode the decimal digits (0-9)), so a 32-bit word could store 8 decimal digits instead of 5.
+[^1]: Why 12-bits? Before the IBM System/360 characters were commonly encoded with 6 bits. The English language has 26 lowercase and 26 uppercase characters totaling 52 unique letters. log<sub>2</sub>(52) = ~5.70 which means that at least 6 bits are needed to encode those letters; why use anymore than one needs? It turned out that the 8-bit encoding of the IBM System/360 was more memory efficient since decimal digits could be "packed" into one byte (only four bits are needed to encode the decimal digits (0-9)), so a 32-bit word could store 8 decimal digits instead of 5.
 [^2]: For -314 (oct) to 314 (oct) the result will be correct. For A > +314 or A < -314 then result will be correct modulo 2^12^-1 (204 decimal).
 [^3]: For -24 (oct) to 24 (oct) the result will be correct. For A > +24 or A < -24 then result will be correct modulo 2^12^-1 (204 decimal).
 [^4]: Left shifts are circular. (400 << 1 => 001)
