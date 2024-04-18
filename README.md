@@ -3,9 +3,9 @@ Toy Emulator of the CDC160A
 ## Architecture
 ![CDC160A Architecture](./images/architecture.png "CDC160A Architecture")
 
-	  The real CDC160A had a variety of extra registers that handle I/O, buffered data control, and overflow. Since I wrote this in SML with the power of a computer thousands of times faster than a CDC I chose to ignore those constraints (hence the "Toy" in "Toy Emulator"). We are only concerned with two registers: A and P. A is the arithmetic register (or accumulator) which is where all arithmetic computations take place. P is the program control register which stores the value of the current address in the relative data bank.
+The real CDC160A had a variety of extra registers that handle I/O, buffered data control, and overflow. Since I wrote this in SML with the power of a computer thousands of times faster than a CDC I chose to ignore those constraints (hence the "Toy" in "Toy Emulator"). We are only concerned with two registers: A and P. A is the arithmetic register (or accumulator) which is where all arithmetic computations take place. P is the program control register which stores the value of the current address in the relative data bank.
 
-	  The CDC160A had at least two memory banks and could be upgraded to include up to eight in a single machine. Each bank could hold a maximum of 4096 12-bit words[^1]. Banks could then be assigned the role of relative (r), direct (d), indirect (i), or buffer (b) storage:
+The CDC160A had at least two memory banks and could be upgraded to include up to eight in a single machine. Each bank could hold a maximum of 4096 12-bit words[^1]. Banks could then be assigned the role of relative (r), direct (d), indirect (i), or buffer (b) storage:
 
 - (r): Relative storage bank. All instructions are executed from the bank to which the (r) control has been set. (r) also selects the bank which will be referenced by all instructions who operation codes indicate relative or constant addressing.
 
@@ -15,12 +15,12 @@ Toy Emulator of the CDC160A
 
 - (b): Buffer storage bank. Used for operations which use the buffer I/O channel. Dont worry about this one as I didn't bother implementing it.
 
-  This emulator provides three native memory banks. The real CDC160A would let the user select which numbered memory bank would be assigned to which logical function. Currently I haven't implemented the ability to swap banks, so (r), (i), and (d) are fixed to three separate memory banks.
+This emulator provides three native memory banks. The real CDC160A would let the user select which numbered memory bank would be assigned to which logical function. Currently I haven't implemented the ability to swap banks, so (r), (i), and (d) are fixed to three separate memory banks.
 
 ## Instructions
 (Note: I have only included a subset of instructions provided by the CDC160A manual)
 
-       All codes are in the original octal format. A word is 12-bits. Codes take up one word unless they have a G component, in which case they take up two words.
+All codes are in the original octal format. A word is 12-bits. Codes take up one word unless they have a G component, in which case they take up two words.
 
        - XX refers to a 6-bit constant 
 
