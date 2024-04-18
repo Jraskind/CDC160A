@@ -22,11 +22,11 @@ This emulator provides three native memory banks. The real CDC160A would let the
 
 All codes are in the original octal format. A word is 12-bits. Codes take up one word unless they have a G component, in which case they take up two words.
 
-       - XX refers to a 6-bit constant 
+- XX refers to a 6-bit constant 
 
-       - XXXX refers to a 12-bit constant
+- XXXX refers to a 12-bit constant
 
-       - YYYY refers to a 12-bit memory address
+- YYYY refers to a 12-bit memory address
 
 | OPCODE | F | E | G | Description |
 | --- | -- | -- | ---- | ---------- |
@@ -121,7 +121,7 @@ Once everything is installed you can head to the base folder of the repo, fire u
 
 Ideally, everything will compile just fine and you'll see `val it = true : bool` returned by SML.
 
-Then, all you have to do is call the CDC160 structure's emulate method with a text file that contains CDC160A instructions: `CDC160.emulate "test_files/test.cdc";'
+Then, all you have to do is call the CDC160 structure's emulate method with a text file that contains CDC160A instructions: `CDC160.emulate "test_files/test.cdc";`
 
 ### Writing CDC160A Programs
 
