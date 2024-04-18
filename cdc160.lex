@@ -20,7 +20,8 @@ alpha = [A-Z];
 %%
 <INITIAL> \n => (linep := !linep + 1; continue());
 <INITIAL> {ws}+ => (continue());
-<INITIAL> {digit}+ => (T.W(foldl (fn(elem,acc)=>Word.fromInt(ord(elem)-ord(#"0"))+ Word.<<(acc, 0wx3)) 0wx0 (explode (yytext)), yypos, yypos+size yytext));
+<INITIAL> {digit}{4} => (T.W(foldl (fn(elem,acc)=>Word.fromInt(ord(elem)-ord(#"0"))+ Word.<<(acc, 0wx3)) 0wx0 (explode (yytext)), yypos, yypos+size yytext));
+<INITIAL> {digit}{2} => (T.W(foldl (fn(elem,acc)=>Word.fromInt(ord(elem)-ord(#"0"))+ Word.<<(acc, 0wx3)) 0wx0 (explode (yytext)), yypos, yypos+size yytext));
 <INITIAL> [A-Z]{3} => (T.INS(yypos, yypos+size yytext));
 <INITIAL> [A-Z]* => (error("OPCODE MUST BE THREE LETTERS: "^yytext, !linep); continue());
 <INITIAL> "#" => (YYBEGIN COMMENT; continue());
